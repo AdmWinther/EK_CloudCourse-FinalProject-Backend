@@ -27,3 +27,16 @@ variable "db_admin_password" {
   sensitive   = true
     default     = "EdgePenicillin8#Fly"
 }
+
+variable "acr_admin_username" {
+  description = "ACR admin username"
+  type        = string
+  default     = "vegtableFoxScrew"
+}
+
+variable "acr_admin_password" {
+  description = "ACR admin password"
+  type        = string
+  sensitive   = true
+    default     = "EdgePenicillin8#Fly"
+}
