@@ -5,6 +5,9 @@
 *.tfstate
 *.tfstate.*
 
+# Assets
+*variables.tf
+
 # Crash log files
 crash.log
 crash.*.log
