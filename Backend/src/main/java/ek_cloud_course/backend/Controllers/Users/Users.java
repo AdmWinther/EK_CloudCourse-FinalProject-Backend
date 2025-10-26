@@ -1,47 +1,47 @@
-package ek_cloud_course.backend.Controllers.Domain;
+package ek_cloud_course.backend.Controllers.Users;
 
-import ek_cloud_course.backend.Models.NewDomainRequestBody.newDomainRequestBody;
+import ek_cloud_course.backend.Models.RequestBodies.newUserRequestBodyFromFrontend;
 import ek_cloud_course.backend.Toolbox.HttpRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.http.HttpResponse;
 import java.util.HashMap;
 
 @RestController
-@RequestMapping("domains")
-public class Domain {
+@RequestMapping("users")
+public class Users {
+    @Value("${ServerAddress}")
+    private String ServerAddress;
 
-    @Value("${domain}")
-    private String domain;
-
-    //Get a list of all domains
+    //Get a list of all users
     @GetMapping("")
-    public String getAllDomains() {
-        String url = domain + "domains";
-        System.out.println("Get all domains called, sending request to: " + url);
+    public String getAllUsers() {
+        String url = ServerAddress + "users";
+        System.out.println("Get all users is called, sending request to: " + url);
         ResponseEntity<String> response = HttpRequest.Get(url);
         System.out.println("status Code" + response.getStatusCode());
         System.out.println("Response Body: " + response.getBody());
         if(response.getStatusCode().is2xxSuccessful()) {
             return response.getBody();
         } else {
-            throw new RuntimeException("Failed to get domains from " + url);
+            throw new RuntimeException("Failed to get users from " + url);
         }
     }
 
-    @PostMapping("newDomain")
-    public String PostNewDomains(@RequestBody newDomainRequestBody requestBody) {
-        System.out.println("New Domain Request Body: " + requestBody.newDomain);
-        String url = domain + "domains/" + requestBody.newDomain;
-        System.out.println("Get all domains called, sending request to: " + url);
+    @PostMapping("newUser")
+    public String PostNewDomains(@RequestBody newUserRequestBodyFromFrontend requestBody) {
+        System.out.println("New user Request Body: " + requestBody.username);
+        String url = ServerAddress + "domains/" + requestBody.username;
+        System.out.println("Add a new user, sending request to: " + url);
         HashMap<String, String> headers = new HashMap<>();
+        //add the password to the headers
+        headers.put("password", requestBody.password);
         ResponseEntity<String> response = HttpRequest.put(url, headers);
         System.out.println("status Code" + response.getStatusCode());
         System.out.println("Response Body: " + response.getBody());
         if(response.getStatusCode().is2xxSuccessful()) {
-            return response.getBody();
+            return "new domain"+ requestBody.newDomain +" is created";
         } else {
             throw new RuntimeException("Failed to get domains from " + url);
         }
