@@ -13,13 +13,13 @@ import java.net.http.HttpResponse;
 @RequestMapping("healthcheck")
 public class HealthCheck {
 
-    @Value("${domain}")
-    private String domain;
+    @Value("${ServerAddress}")
+    private String ServerAddress;
 
     @GetMapping("")
     public String healthCheck() {
         //Send a Simple Get request to check if the server is running
-        String url = domain + "healthcheck";
+        String url = ServerAddress + "healthcheck";
         System.out.println("Healthcheck called, sending request to: " + url);
         ResponseEntity<String> response = HttpRequest.Get(url);
         System.out.println("status Code" + response.getStatusCode());

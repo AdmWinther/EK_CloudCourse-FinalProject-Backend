@@ -1,6 +1,7 @@
 package ek_cloud_course.backend.Controllers.Users;
 
-import ek_cloud_course.backend.Models.RequestBodies.newUserRequestBodyFromFrontend;
+import ek_cloud_course.backend.Models.RequestBodies.NewUserRequestBodyFromFrontend;
+import ek_cloud_course.backend.Models.RequestBodies.NewUserRequestBodyToMailServer;
 import ek_cloud_course.backend.Toolbox.HttpRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -30,20 +31,21 @@ public class Users {
     }
 
     @PostMapping("newUser")
-    public String PostNewDomains(@RequestBody newUserRequestBodyFromFrontend requestBody) {
-        System.out.println("New user Request Body: " + requestBody.username);
-        String url = ServerAddress + "domains/" + requestBody.username;
+    public String PostNewDomains(@RequestBody NewUserRequestBodyFromFrontend requestBodyFromFront) {
+        System.out.println("New user Request Body: " + requestBodyFromFront.username);
+        String url = ServerAddress + "users/" + requestBodyFromFront.username;
         System.out.println("Add a new user, sending request to: " + url);
-        HashMap<String, String> headers = new HashMap<>();
-        //add the password to the headers
-        headers.put("password", requestBody.password);
-        ResponseEntity<String> response = HttpRequest.put(url, headers);
+
+        NewUserRequestBodyToMailServer requestBodyToServer = new NewUserRequestBodyToMailServer();
+        requestBodyToServer.password = requestBodyFromFront.password;
+
+        ResponseEntity<String> response = HttpRequest.put(url, requestBodyToServer);
         System.out.println("status Code" + response.getStatusCode());
         System.out.println("Response Body: " + response.getBody());
         if(response.getStatusCode().is2xxSuccessful()) {
-            return "new domain"+ requestBody.newDomain +" is created";
+            return "new user"+ requestBodyFromFront.username +" is created";
         } else {
-            throw new RuntimeException("Failed to get domains from " + url);
+            throw new RuntimeException("Failed to make a new user " + url);
         }
     }
 }

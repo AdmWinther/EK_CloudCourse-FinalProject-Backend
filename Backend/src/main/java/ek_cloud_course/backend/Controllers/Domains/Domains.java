@@ -1,6 +1,7 @@
 package ek_cloud_course.backend.Controllers.Domains;
 
-import ek_cloud_course.backend.Models.RequestBodies.newDomainRequestBody;
+import ek_cloud_course.backend.Models.RequestBodies.NewDomainRequestBody;
+import ek_cloud_course.backend.Models.RequestBodies.NewDomainRequestBodyToServer;
 import ek_cloud_course.backend.Toolbox.HttpRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -31,16 +32,17 @@ public class Domains {
     }
 
     @PostMapping("newDomain")
-    public String PostNewDomains(@RequestBody newDomainRequestBody requestBody) {
+    public String PostNewDomains(@RequestBody NewDomainRequestBody requestBody) {
         System.out.println("New Domain Request Body: " + requestBody.newDomain);
         String url = ServerAddress + "domains/" + requestBody.newDomain;
         System.out.println("Registering new domain, sending request to: " + url);
-        HashMap<String, String> headers = new HashMap<>();
-        ResponseEntity<String> response = HttpRequest.put(url, headers);
+
+        NewDomainRequestBodyToServer bodyToServer = new NewDomainRequestBodyToServer();
+        ResponseEntity<String> response = HttpRequest.put(url, bodyToServer);
         System.out.println("status Code" + response.getStatusCode());
         System.out.println("Response Body: " + response.getBody());
         if(response.getStatusCode().is2xxSuccessful()) {
-            return "new domain"+ requestBody.newDomain +" is created";
+            return "new domain "+ requestBody.newDomain +" is created";
         } else {
             throw new RuntimeException("Failed to get domains from " + url);
         }

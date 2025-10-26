@@ -1,6 +1,7 @@
 package ek_cloud_course.backend.Toolbox;
 
 
+import ek_cloud_course.backend.Models.RequestBodies.IRequestBody;
 import ek_cloud_course.backend.Models.RequestBodies.NewUserRequestBodyToMailServer;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -22,24 +23,31 @@ public class HttpRequest {
         return response;
     }
 
-    public static ResponseEntity<String> put(String url, HashMap<String, String> body) {
+    public static ResponseEntity<String> put(String url, IRequestBody requestBody) {
+
+//        System.out.println("Password in request body: " + body.get("password"));
+
         RestTemplate restTemplate = new RestTemplate();
 
-        NewUserRequestBodyToMailServer requestBody = new NewUserRequestBodyToMailServer();
-        requestBody.password = body.get("password");
+//        NewUserRequestBodyToMailServer requestBody = new NewUserRequestBodyToMailServer();
+//        requestBody.password = body.get("password");
 
         // Create HttpEntity with headers and body
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        HttpEntity<NewUserRequestBodyToMailServer> entity = new HttpEntity<>(requestBody, headers);
+        HttpEntity<IRequestBody> entity = new HttpEntity<>(requestBody, headers);
+
         // Send PUT request and read response code
+
+        System.out.println("before sending PUT request to: " + url);
         ResponseEntity<String> response = restTemplate.exchange(
                 url,
                 HttpMethod.PUT,
-                null,
+                entity,
                 String.class
         );
+        System.out.println("after sending PUT request to: " + url);
 
         System.out.println("Response: " + response.getBody());
 
