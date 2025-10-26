@@ -2,9 +2,9 @@ name: Build and Push Docker Image
 
 on:
   push:
-    branches: [ main ]   # Run the workflow when the code is pushed to the main branch
+    branches: [ master ]   # Run the workflow when the code is pushed to the master branch
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
   build:
