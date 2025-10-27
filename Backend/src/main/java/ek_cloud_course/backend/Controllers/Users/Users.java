@@ -43,7 +43,7 @@ public class Users {
         System.out.println("status Code" + response.getStatusCode());
         System.out.println("Response Body: " + response.getBody());
         if(response.getStatusCode().is2xxSuccessful()) {
-            return "new user"+ requestBodyFromFront.username +" is created";
+            return "new user "+ requestBodyFromFront.username +" is created";
         } else {
             throw new RuntimeException("Failed to make a new user " + url);
         }

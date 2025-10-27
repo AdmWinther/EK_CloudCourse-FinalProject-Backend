@@ -2,6 +2,7 @@ package ek_cloud_course.backend.Controllers.Domains;
 
 import ek_cloud_course.backend.Models.RequestBodies.NewDomainRequestBody;
 import ek_cloud_course.backend.Models.RequestBodies.NewDomainRequestBodyToServer;
+import ek_cloud_course.backend.Models.RequestBodies.NewUserRequestBodyToMailServer;
 import ek_cloud_course.backend.Toolbox.HttpRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
