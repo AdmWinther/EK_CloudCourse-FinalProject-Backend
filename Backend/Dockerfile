@@ -5,7 +5,7 @@ FROM eclipse-temurin:17-jdk
 WORKDIR /app
 
 # Copy the built JAR file into the container
-COPY /home/runner/work/EK_CloudCourseProject/EK_CloudCourseProject/Backend/target/backend-0.0.1-SNAPSHOT.jar app.jar
+COPY ./target/*.jar app.jar
 
 # Run the jar file
 ENTRYPOINT ["java", "-jar", "app.jar"]
