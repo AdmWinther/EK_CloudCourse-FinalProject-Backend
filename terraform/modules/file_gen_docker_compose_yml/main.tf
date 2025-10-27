@@ -81,7 +81,8 @@ services:
     container_name: ${var.backend-container-name}
     ports:
       - "8080:8080"
-
+    environment:
+      ServerAddress: http://james:8000/
     networks:
       - ${var.docker-network}
     depends_on:

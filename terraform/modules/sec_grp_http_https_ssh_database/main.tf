@@ -24,12 +24,13 @@ resource "aws_security_group" "http_https_ssh_database" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  # ingress {
-  #   from_port   = 8080
-  #   to_port     = 8080
-  #   protocol    = "tcp"
-  #   cidr_blocks = ["0.0.0.0/0"]
-  # }
+    #allow HTTP alternative port 8080 for backend server. the container "back" uses this port.
+  ingress {
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
 
 
