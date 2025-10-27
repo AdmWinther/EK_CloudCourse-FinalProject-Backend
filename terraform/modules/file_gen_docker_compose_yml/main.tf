@@ -12,6 +12,9 @@ variable "db_volume" {}
 variable "james-container-name" {}
 variable "james-docker-image" {}
 
+#Backend related variables
+variable "backend-docker-image" {}
+variable "backend-container-name" {}
 
 #EBC volume related variables
 variable "volume-initialize" {
@@ -73,6 +76,16 @@ services:
     depends_on:
       - mariadb
 
+  back:
+    image: ${var.backend-docker-image}
+    container_name: ${var.backend-container-name}
+    ports:
+      - "8080:8080"
+
+    networks:
+      - ${var.docker-network}
+    depends_on:
+      - james
 networks:
   ${var.docker-network}:
 

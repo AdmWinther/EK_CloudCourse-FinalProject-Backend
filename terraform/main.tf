@@ -36,6 +36,8 @@ module "file_gen_docker_compose_yml" {
     james-docker-image    = var.james-docker-image
 
     volume-initialize     = var.container_volume_initialize
+    backend-container-name = var.backend-container-name
+    backend-docker-image   = var.backend-docker-image
 }
 
 #XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX    Database CONFIG FILEs GENERATOR    XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
