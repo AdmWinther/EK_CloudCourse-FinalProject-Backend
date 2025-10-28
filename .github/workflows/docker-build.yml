@@ -27,18 +27,18 @@ jobs:
       # 3. Build the JAR file using Maven
       - name: Build with Maven
         run: mvn clean package -DskipTests
-        working-directory: ./Backend
+        #working-directory: ./Backend
 
       # 3.1. Verify that the jar file was created
       - name: Verify JAR file exists
         run: ls -l target
-        working-directory: ./Backend
+        #working-directory: ./Backend
 
 
       # 3.2. What is in the Backend directory?
       - name: Verify JAR file exists
         run: ls -l .
-        working-directory: ./Backend
+        #working-directory: ./Backend
 
       # 4. Log in to Docker Hub
       - name: Log in to Docker Hub
@@ -51,7 +51,7 @@ jobs:
       - name: Build Docker image
         run: |
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/admrestapi:latest .
-        working-directory: ./Backend
+        #working-directory: ./Backend
 
       # 5.1. Make sure the image has the app.jar file
       #- name: Verify jar inside Docker image
@@ -74,6 +74,7 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
+          #todo: stop the container and rename the old image before downloading the new one. (do not remove the old one yet, in case the new one fails)
           script: |
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/admrestapi:latest
             docker stop back || true

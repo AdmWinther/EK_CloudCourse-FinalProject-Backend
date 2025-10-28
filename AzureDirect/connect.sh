@@ -1,1 +1,0 @@
-ssh -i EmailServer_key-azure.pem azureuser@20.251.146.4
