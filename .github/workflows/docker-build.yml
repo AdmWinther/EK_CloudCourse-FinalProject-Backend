@@ -87,7 +87,7 @@ jobs:
         run: |
           docker build -t $AWS_ECR_REGISTRY/$AWS_ECR_REPOSITORY:latest .
           docker push $AWS_ECR_REGISTRY/$AWS_ECR_REPOSITORY:latest
-        working-directory: ./Backend
+        #working-directory: ./Backend
 
   # The deployment job connects to the server via SSH and updates the running Docker container
   deploy:
