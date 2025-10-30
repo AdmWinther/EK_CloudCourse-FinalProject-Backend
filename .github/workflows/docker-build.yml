@@ -27,18 +27,17 @@ jobs:
       # 3. Build the JAR file using Maven
       - name: Build with Maven
         run: mvn clean package
-        #working-directory: ./Backend
+        env:
+          ServerAddress: ${{ secrets.BACKEND_ENV_VARIABLE_SERVER_ADDRESS}}
 
       # 3.1. Verify that the jar file was created
       - name: Verify JAR file exists
         run: ls -l target
-        #working-directory: ./Backend
 
 
       # 3.2. What is in the Backend directory?
       - name: Verify JAR file exists
         run: ls -l .
-        #working-directory: ./Backend
 
       # 4. Log in to Docker Hub
       - name: Log in to Docker Hub
@@ -56,7 +55,6 @@ jobs:
       # 5.1. Make sure the image has the app.jar file
       #- name: Verify jar inside Docker image
       #  run: docker run --rm -e ServerAddress=http://awin.dk:8000/ ${{ secrets.DOCKERHUB_USERNAME }}/admrestapi:latest ls -l /app
-      #  working-directory: ./Backend
 
         # 6. Push image to Docker Hub
       - name: Push Docker image
