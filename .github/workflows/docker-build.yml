@@ -99,7 +99,8 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
-          #todo: stop the container and rename the old image before downloading the new one. (do not remove the old one yet, in case the new one fails)
+          #todo: stop the container and rename the old image before downloading the new one.
+          #todo: (do not remove the old one yet, in case the new one fails)
           script: |
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/admrestapi:latest
             docker stop back || true

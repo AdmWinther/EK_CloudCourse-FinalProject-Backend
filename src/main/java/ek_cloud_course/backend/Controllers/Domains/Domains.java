@@ -45,7 +45,7 @@ public class Domains {
         if(response.getStatusCode().is2xxSuccessful()) {
             return "new domain "+ requestBody.newDomain +" is created";
         } else {
-            throw new RuntimeException("Failed to get domains from " + url);
+            throw new RuntimeException("Failed to get domains from the address: " + url);
         }
     }
 }
