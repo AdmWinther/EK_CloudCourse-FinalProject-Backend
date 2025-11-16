@@ -21,7 +21,7 @@ public class Domains {
     @GetMapping("")
     public String getAllDomains() {
         String url = ServerAddress + "domains";
-        System.out.println("Get all domains is called, sending request to: " + url);
+        System.out.println("Get all domains is called it is just a test. Sending request to: " + url);
         ResponseEntity<String> response = HttpRequest.Get(url);
         System.out.println("status Code" + response.getStatusCode());
         System.out.println("Response Body: " + response.getBody());
@@ -43,7 +43,7 @@ public class Domains {
         System.out.println("status Code" + response.getStatusCode());
         System.out.println("Response Body: " + response.getBody());
         if(response.getStatusCode().is2xxSuccessful()) {
-            return "new domain "+ requestBody.newDomain +" is created. it is just a test.";
+            return "new domain "+ requestBody.newDomain +" is created.";
         } else {
             throw new RuntimeException("Failed to get domains from the address: " + url);
         }

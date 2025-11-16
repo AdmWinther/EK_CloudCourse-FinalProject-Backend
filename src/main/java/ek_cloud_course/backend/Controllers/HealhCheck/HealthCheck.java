@@ -20,7 +20,7 @@ public class HealthCheck {
     public String healthCheck() {
         //Send a Simple Get request to check if the server is running
         String url = ServerAddress + "healthcheck";
-        System.out.println("Healthcheck called, sending request to: " + url);
+        System.out.println("Healthcheck called, we run java21. sending request to: " + url);
         ResponseEntity<String> response = HttpRequest.Get(url);
         System.out.println("status Code" + response.getStatusCode());
         System.out.println("Response Body: " + response.getBody());
