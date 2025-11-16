@@ -43,7 +43,7 @@ public class Domains {
         System.out.println("status Code" + response.getStatusCode());
         System.out.println("Response Body: " + response.getBody());
         if(response.getStatusCode().is2xxSuccessful()) {
-            return "new domain "+ requestBody.newDomain +" is created";
+            return "new domain "+ requestBody.newDomain +" is created. it is just a test.";
         } else {
             throw new RuntimeException("Failed to get domains from the address: " + url);
         }
